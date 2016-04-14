@@ -8,7 +8,7 @@ Using Celery_ to process tasks in the background the provided models include
 methods to retrieve and store data for Accounts, Campaigns, Ad Groups and Ads to
 your database for further processing.
 
-Currently Google Adwords API version v201506_ is supported.
+Currently Google Adwords API version v201509_ is supported.
 
 Installation
 ============
@@ -181,7 +181,7 @@ Google Adwords API Versions
 ===========================
 
 The intention is to keep in sync with the latest available Google Adwords API
-versions - currently this is v201506_
+versions - currently this is v201509_
 
 To do this it's highly possible we'll need to break backwards compatibility as
 the API can potentially do that.
@@ -263,4 +263,4 @@ Authors
 .. _`Django`: https://www.djangoproject.com/
 .. _`Google Adwords API`: https://developers.google.com/adwords/api/
 .. _`Celery`: http://www.celeryproject.org
-.. _v201506: https://developers.google.com/adwords/api/docs/reference/#v201506
+.. _v201509: https://developers.google.com/adwords/api/docs/reference/#v201509

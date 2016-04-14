@@ -1,3 +1,7 @@
+# Release 0.7.3 - Thu Apr 14 11:03:55 AEST 2016
+
+- Update Google AdWords API from v201506 to v201509
+
 # Release 0.7.2 - Mon Jul 27 08:24:50 AEST 2015
 
 - Fixed incorrect googleads version in requirements to 3.5.0.

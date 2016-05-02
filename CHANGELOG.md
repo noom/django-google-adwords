@@ -1,4 +1,12 @@
+# Release 0.7.4 - Mon May  2 12:02:45 AEST 2016
+
+- Fix 0.7.3.
+- `est_*` and `*_est_*` fields removed from metrics.
+- Other requirements updates/fixes
+
 # Release 0.7.3 - Thu Apr 14 11:03:55 AEST 2016
+
+This release is broken. Code changes *were* actually required.
 
 - Update Google AdWords API from v201506 to v201509
 

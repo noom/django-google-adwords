@@ -1,3 +1,9 @@
+# Release 0.7.5 - Mon May  2 23:05:00 AEST 2016
+
+- Kinda hackily fix 0.7.4 data import, with some wonky field types.
+
+This is getting awfully tedious. We're seriously doing things the wrong way.
+
 # Release 0.7.4 - Mon May  2 12:02:45 AEST 2016
 
 - Fix 0.7.3.

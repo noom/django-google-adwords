@@ -90,6 +90,17 @@ class PopulatingGoogleAdwordsQuerySet(_QuerySet):
 
             value = clean(_value, field)
             try:
+                # Temporary nasty hack, made on 2016-05-02, related to the
+                # forced v201509 API upgrade: we have a few fields as integer
+                # fields which are actually now doubles in the API. I have no
+                # time whatsoever to fix this properly. Can one safely change a
+                # BigIntegerField to a DecimalField? I'm scared. Hopefully the
+                # value is always integral. I *think* it should be. But I
+                # presume there's a reason why they made the new Conversion
+                # fields doubles. So I'm doubly scared.
+                if isinstance(field, models.BigIntegerField) and value.endswith('.0'):
+                    value = value[:-2]
+
                 value = field.to_python(value)
             except DjangoValidationError as e:
                 raise ValidationError(field_name, e.messages)

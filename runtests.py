@@ -50,8 +50,6 @@ if not settings.configured:
                    '--cover-package=django_google_adwords',
                    '--cover-erase',
                    '--with-fixture-bundling',
-                   # Nose Progressive
-                   '--with-progressive',
                    ]
     )
 

@@ -1,4 +1,4 @@
-Django>=1.7,<1.9
+#Django>=1.7,<1.9  # Removed for the sake of tox
 py-moneyed~=0.5.0
 django-money~=0.7.0
 googleads~=3.8

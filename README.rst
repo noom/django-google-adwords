@@ -213,8 +213,8 @@ a development environment up you should be able to do the following;
 
 	git clone https://bitbucket.org/alexhayes/django-google-adwords.git
 	cd django-google-adwords
-	pip instal -r requirements/default.txt
-	pip instal -r requirements/test.txt
+	pip install -r requirements/default.txt
+	pip install -r requirements/test.txt
 	./runtests.py
 
 And to run the full test suite, you can then run;
@@ -239,7 +239,7 @@ on your OS, on Ubuntu you can do the following;
 
 Note that :code:`django-nose` issue `#133`_ and `#197`_ cause issues with some 
 tests thus the reason for `alexhayes/django-nose`_ being used in the 
-:code:`requirements/test.py` and :code:`requirements/test3.py`.
+:code:`requirements/test.py`.
 
 .. _`#133`: https://github.com/django-nose/django-nose/issues/133
 .. _`#197`: https://github.com/django-nose/django-nose/issues/197

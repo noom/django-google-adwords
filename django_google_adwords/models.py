@@ -445,22 +445,15 @@ class Account(models.Model):
                     'ContentImpressionShare',
                     'ContentRankLostImpressionShare',
                     'ClickConversionRate',
-                    'ConversionRateManyPerClick',
+                    'ConversionRate',
                     'ConversionValue',
                     'ConvertedClicks',
-                    'ConversionsManyPerClick',
+                    'Conversions',
                     'Cost',
                     'CostPerConvertedClick',
-                    'CostPerConversionManyPerClick',
-                    'CostPerEstimatedTotalConversion',
+                    'CostPerConversion',
                     'Ctr',
                     'Device',
-                    'EstimatedCrossDeviceConversions',
-                    'EstimatedTotalConversionRate',
-                    'EstimatedTotalConversionValue',
-                    'EstimatedTotalConversionValuePerClick',
-                    'EstimatedTotalConversionValuePerCost',
-                    'EstimatedTotalConversions',
                     'Impressions',
                     'InvalidClickRate',
                     'InvalidClicks',
@@ -627,13 +620,6 @@ class DailyAccountMetrics(models.Model):
     updated = models.DateTimeField(auto_now=True)
     content_impr_share = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Content Impr. share')
     content_lost_is_rank = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Content Lost IS (rank)')
-    cost_est_total_conv = MoneyField(max_digits=12, decimal_places=2, default=0, help_text='Cost / est. total conv.', null=True, blank=True)
-    est_cross_device_conv = models.BigIntegerField(help_text='Est. cross-device conv.', null=True, blank=True)
-    est_total_conv_rate = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. rate')
-    est_total_conv_value = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value')
-    est_total_conv_value_click = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value / click')
-    est_total_conv_value_cost = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value / cost')
-    est_total_conv = models.BigIntegerField(help_text='Est. total conv.', null=True, blank=True)
     search_exact_match_is = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Exact match IS')
     search_impr_share = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Impr. share')
     search_lost_is_rank = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Lost IS (rank)')
@@ -838,28 +824,14 @@ class Campaign(models.Model):
                            'ContentRankLostImpressionShare',
                            'ContentRankLostImpressionShare',
                            'ClickConversionRate',
-                           'ConversionRateManyPerClick',
+                           'ConversionRate',
                            'ConversionValue',
                            'ConvertedClicks',
-                           'ConversionsManyPerClick',
+                           'Conversions',
                            'Cost',
                            'CostPerConvertedClick',
-                           'CostPerConversionManyPerClick',
-                           'CostPerEstimatedTotalConversion',
-                           'CostPerEstimatedTotalConversion',
+                           'CostPerConversion',
                            'Ctr',
-                           'EstimatedCrossDeviceConversions',
-                           'EstimatedCrossDeviceConversions',
-                           'EstimatedTotalConversionRate',
-                           'EstimatedTotalConversionRate',
-                           'EstimatedTotalConversions',
-                           'EstimatedTotalConversions',
-                           'EstimatedTotalConversionValue',
-                           'EstimatedTotalConversionValue',
-                           'EstimatedTotalConversionValuePerClick',
-                           'EstimatedTotalConversionValuePerClick',
-                           'EstimatedTotalConversionValuePerCost',
-                           'EstimatedTotalConversionValuePerCost',
                            'Impressions',
                            'InvalidClickRate',
                            'InvalidClicks',
@@ -935,13 +907,6 @@ class DailyCampaignMetrics(models.Model):
     updated = models.DateTimeField(auto_now=True)
     content_impr_share = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Content Impr. share')
     content_lost_is_rank = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Content Lost IS (rank)')
-    cost_est_total_conv = MoneyField(max_digits=12, decimal_places=2, default=0, help_text='Cost / est. total conv.', null=True, blank=True)
-    est_cross_device_conv = models.BigIntegerField(help_text='Est. cross-device conv.', null=True, blank=True)
-    est_total_conv_rate = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. rate')
-    est_total_conv_value = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value')
-    est_total_conv_value_click = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value / click')
-    est_total_conv_value_cost = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value / cost')
-    est_total_conv = models.BigIntegerField(help_text='Est. total conv.', null=True, blank=True)
     search_exact_match_is = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Exact match IS')
     search_impr_share = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Impr. share')
     search_lost_is_rank = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Lost IS (rank)')
@@ -1097,37 +1062,29 @@ class AdGroup(models.Model):
                            'CampaignName',
                            'CampaignStatus',
                            'TargetCpa',
-                           'ValuePerEstimatedTotalConversion',
                            'BiddingStrategyId',
                            'BiddingStrategyName',
                            'BiddingStrategyType',
                            'ContentImpressionShare',
                            'ContentRankLostImpressionShare',
-                           'CostPerEstimatedTotalConversion',
-                           'EstimatedCrossDeviceConversions',
-                           'EstimatedTotalConversionRate',
-                           'EstimatedTotalConversionValue',
-                           'EstimatedTotalConversionValuePerClick',
-                           'EstimatedTotalConversionValuePerCost',
-                           'EstimatedTotalConversions',
                            'SearchExactMatchImpressionShare',
                            'SearchImpressionShare',
                            'SearchRankLostImpressionShare',
                            'ValuePerConvertedClick',
-                           'ValuePerConversionManyPerClick',
+                           'ValuePerConversion',
                            'ViewThroughConversions',
                            'AverageCpc',
                            'AverageCpm',
                            'AveragePosition',
                            'Clicks',
                            'ClickConversionRate',
-                           'ConversionRateManyPerClick',
+                           'ConversionRate',
                            'ConversionValue',
                            'ConvertedClicks',
-                           'ConversionsManyPerClick',
+                           'Conversions',
                            'Cost',
                            'CostPerConvertedClick',
-                           'CostPerConversionManyPerClick',
+                           'CostPerConversion',
                            'Ctr',
                            'Impressions',
                            'Date'],
@@ -1188,13 +1145,6 @@ class DailyAdGroupMetrics(models.Model):
     updated = models.DateTimeField(auto_now=True)
     content_impr_share = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Content Impr. share')
     content_lost_is_rank = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Content Lost IS (rank)')
-    cost_est_total_conv = MoneyField(max_digits=12, decimal_places=2, default=0, help_text='Cost / est. total conv.', null=True, blank=True)
-    est_cross_device_conv = models.BigIntegerField(help_text='Est. cross-device conv.', null=True, blank=True)
-    est_total_conv_rate = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. rate')
-    est_total_conv_value = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value')
-    est_total_conv_value_click = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value / click')
-    est_total_conv_value_cost = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Est. total conv. value / cost')
-    est_total_conv = models.BigIntegerField(help_text='Est. total conv.', null=True, blank=True)
     search_exact_match_is = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Exact match IS')
     search_impr_share = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Impr. share')
     search_lost_is_rank = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Search Lost IS (rank)')
@@ -1202,7 +1152,6 @@ class DailyAdGroupMetrics(models.Model):
     bid_strategy_name = models.CharField(max_length=255, null=True, blank=True)
     bid_strategy_type = models.CharField(max_length=40, choices=BID_STRATEGY_TYPE_CHOICES, help_text='Bid Strategy Type', null=True, blank=True)
     max_cpa_converted_clicks = MoneyField(max_digits=12, decimal_places=2, default=0, help_text='Max. CPA (converted clicks)', null=True, blank=True)
-    value_est_total_conv = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Value / est. total conv.')
     value_converted_click = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Value / converted click')
     value_conv = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Value / conv.')
     view_through_conv = models.BigIntegerField(help_text='View-through conv.', null=True, blank=True)
@@ -1393,13 +1342,13 @@ class Ad(models.Model):
                            'CampaignStatus',
                            'Clicks',
                            'ClickConversionRate',
-                           'ConversionRateManyPerClick',
+                           'ConversionRate',
                            'ConversionValue',
                            'ConvertedClicks',
-                           'ConversionsManyPerClick',
+                           'Conversions',
                            'Cost',
                            'CostPerConvertedClick',
-                           'CostPerConversionManyPerClick',
+                           'CostPerConversion',
                            'CreativeApprovalStatus',
                            'CreativeDestinationUrl',
                            'Ctr',
@@ -1411,7 +1360,7 @@ class Ad(models.Model):
                            'Impressions',
                            'Status',
                            'ValuePerConvertedClick',
-                           'ValuePerConversionManyPerClick',
+                           'ValuePerConversion',
                            'ViewThroughConversions',
                            'Date'],
                 'dateRange': {'min': start.strftime("%Y%m%d"),

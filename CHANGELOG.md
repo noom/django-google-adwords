@@ -1,3 +1,7 @@
+# Release 0.7.6 - Wed May 25 15:07:43 AEST 2016
+
+- Fix `paged_request` if it yields no results
+
 # Release 0.7.5 - Mon May  2 23:05:00 AEST 2016
 
 - Kinda hackily fix 0.7.4 data import, with some wonky field types.

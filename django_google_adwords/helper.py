@@ -105,6 +105,8 @@ def paged_request(service, selector={}, number_results=100, start_index=0, retry
     while more_pages:
         try:
             response = service.get(selector)
+            if not hasattr(response, 'entries'):
+                break
             yield response.entries, selector
 
             # Now, get the next set of results

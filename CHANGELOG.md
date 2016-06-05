@@ -1,3 +1,18 @@
+# Release 0.7.7 - Mon Jun  6 08:43:24 AEST 2016
+
+- Correct Adwords to AdWords everywhere.
+
+  For members of the public API the old names have been left around as
+  aliases, so there should not be any compatibility problems. Unless you
+  were doing things like hardcoding the name of an exception as a string.
+  Which is, I suppose, quite feasible. Still, I’m not going to consider it
+  a breaking change.
+
+- Support calculating spend with missing data.
+
+  Insufficient data is not always a problem. If your access has been
+  revoked, you may just wish to ignore the fact.
+
 # Release 0.7.6 - Wed May 25 15:07:43 AEST 2016
 
 - Fix `paged_request` if it yields no results

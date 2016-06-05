@@ -1,7 +1,7 @@
 from appconf.base import AppConf
 
 
-class GoogleAdwordsConf(AppConf):
+class GoogleAdWordsConf(AppConf):
     # Authentication details - add to your settings file with prefix
     CLIENT_ID = ''
     CLIENT_SECRET = ''
@@ -42,3 +42,7 @@ class GoogleAdwordsConf(AppConf):
 
     class Meta:
         prefix = 'GOOGLEADWORDS'
+
+
+# For backwards compatibility (it was renamed in 0.7.7)
+GoogleAdwordsConf = GoogleAdWordsConf

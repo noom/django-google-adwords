@@ -2,13 +2,13 @@
 django-google-adwords
 =====================
 
-`Django`_ modelling and helpers for the `Google Adwords API`_.
+`Django`_ modelling and helpers for the `Google AdWords API`_.
 
 Using Celery_ to process tasks in the background the provided models include
 methods to retrieve and store data for Accounts, Campaigns, Ad Groups and Ads to
 your database for further processing.
 
-Currently Google Adwords API version v201509_ is supported.
+Currently Google AdWords API version v201509_ is supported.
 
 Installation
 ============
@@ -53,7 +53,7 @@ You must place the following in your django settings file.
 	GOOGLEADWORDS_CLIENT_CUSTOMER_ID = 'your-adwords-client-customer-id' # xyz123xyz123xyz123xyz1
 
 If you don't know these values already you'll probably want to read the Google
-Adwords `OAuth 2.0 Authentication`_ documentation.
+AdWords `OAuth 2.0 Authentication`_ documentation.
 
 .. _`OAuth 2.0 Authentication`: https://developers.google.com/adwords/api/docs/guides/authentication
 
@@ -69,12 +69,12 @@ Celery
 ------
 
 Celery_ installation and configuration is somewhat out of the scope of this
-document but in order to sync Google Adwords data into models you will need a
+document but in order to sync Google AdWords data into models you will need a
 working Celery.
 
 Essentially the syncing of data is a two step process, as follows;
 
-1. Reports are downloaded from Adwords using the Celery queue specified in the 
+1. Reports are downloaded from AdWords using the Celery queue specified in the 
 setting :code:`GOOGLEADWORDS_REPORT_RETRIEVAL_CELERY_QUEUE`.
 2. Downloaded reports are processed using the Celery queue specified in the 
 setting :code:`GOOGLEADWORDS_DATA_IMPORT_CELERY_QUEUE`.  
@@ -107,7 +107,7 @@ Usage
 Storing local data
 ------------------
 
-The provided models include methods to sync data from the Google Adwords API to
+The provided models include methods to sync data from the Google AdWords API to
 the local models so that it can be queried at a later stage.
 
 .. code-block:: python
@@ -116,7 +116,7 @@ the local models so that it can be queried at a later stage.
 	account = Account.objects.create(account_id=account_id)
 	result = account.sync() # returns a celery AsyncResult
 
-Depending on the amount of data contained with your Adwords account the above
+Depending on the amount of data contained with your AdWords account the above
 could take quite some time to populate! Advice is to monitor the celery task.
 
 You can control what data is sync'd with the following settings:
@@ -177,10 +177,10 @@ with the following;
 	    print data
 
 
-Google Adwords API Versions
+Google AdWords API Versions
 ===========================
 
-The intention is to keep in sync with the latest available Google Adwords API
+The intention is to keep in sync with the latest available Google AdWords API
 versions - currently this is v201509_
 
 To do this it's highly possible we'll need to break backwards compatibility as
@@ -261,6 +261,6 @@ Authors
 - Alex Hayes <alex@alution.com>
 
 .. _`Django`: https://www.djangoproject.com/
-.. _`Google Adwords API`: https://developers.google.com/adwords/api/
+.. _`Google AdWords API`: https://developers.google.com/adwords/api/
 .. _`Celery`: http://www.celeryproject.org
 .. _v201509: https://developers.google.com/adwords/api/docs/reference/#v201509

@@ -20,7 +20,7 @@ def _get_report_file(name):
     return report_file
 
 
-class DjangoGoogleAdwordsTestCase(TransactionTestCase):
+class DjangoGoogleAdWordsTestCase(TransactionTestCase):
     fixtures = [
         'django_google_adwords.yaml'
     ]

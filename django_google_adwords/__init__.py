@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Django modelling and helpers for the Google Adwords API."""
+"""Django modelling and helpers for the Google AdWords API."""
 # :copyright: (c) 2015 Alex Hayes and individual contributors,
 #                 All rights reserved.
 # :license:   MIT License, see LICENSE for more details.

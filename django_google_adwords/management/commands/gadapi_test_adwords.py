@@ -5,7 +5,7 @@ from ...helper import paged_request
 
 class Command(BaseCommand):
     args = '[ideas|stats]'
-    help = "Test connection to Google Adwords API for the GetTargetingIdeaService."
+    help = "Test connection to Google AdWords API for the GetTargetingIdeaService."
 
     def handle(self, *args, **options):
         keywords = ['seo', 'adwords', 'adwords seo']

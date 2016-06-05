@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 def adwords_service(client_customer_id=None):
     """
     Get an instance of GoogleRefreshTokenClient with configuration as per defined settings
-    and use that to create an instance of AdwordsClient.
+    and use that to create an instance of AdWordsClient.
     """
     if not client_customer_id:
         client_customer_id = settings.GOOGLEADWORDS_CLIENT_CUSTOMER_ID
@@ -32,7 +32,7 @@ def adwords_service(client_customer_id=None):
 
 def paged_request(service, selector={}, number_results=100, start_index=0, retry=True, number_pages=False):
     """
-    Yields paged data as retrieved from the Adwords API.
+    Yields paged data as retrieved from the AdWords API.
 
     Alert Service Example:
 

@@ -31,7 +31,7 @@ from djmoney.models.fields import MoneyField
 from googleads.errors import GoogleAdsError
 
 from .lock import acquire_googleadwords_lock
-from .settings import GoogleAdwordsConf  # import AppConf settings
+from .settings import GoogleAdWordsConf  # import AppConf settings
 
 
 logger = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ def attribute_to_field_name(attribute):
     return remove_non_letters.sub(r'', attribute.lower().replace(' ', '_')).replace('__', '_')
 
 
-class PopulatingGoogleAdwordsQuerySet(_QuerySet):
+class PopulatingGoogleAdWordsQuerySet(_QuerySet):
     IGNORE_FIELDS = ['created', 'updated']
 
     def populate_model_from_dict(self, model, data, ignore_fields=[]):
@@ -125,7 +125,7 @@ class PopulatingGoogleAdwordsQuerySet(_QuerySet):
         """
         Low level get or create model which then populates the model with data.
 
-        :param data: A dict of data as retrieved from the Google Adwords API.
+        :param data: A dict of data as retrieved from the Google AdWords API.
         :param **kwargs: Keyword args that are supplied to retrieve the model instance
                          and also to generate an instance if one does not exist.
         :return: models.Model
@@ -170,7 +170,7 @@ class Account(models.Model):
     def __unicode__(self):
         return '%s' % (self.account_id)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def active(self):
             return Account.objects.filter(status=Account.STATUS_ACTIVE)
@@ -204,9 +204,9 @@ class Account(models.Model):
           queue=settings.GOOGLEADWORDS_HOUSEKEEPING_CELERY_QUEUE)
     def sync(self, start=None, force=False, sync_account=True, sync_campaign=False, sync_adgroup=False, sync_ad=False):
         """
-        Sync all data from Google Adwords API for this account.
+        Sync all data from Google AdWords API for this account.
 
-        Retrieve and populate the following reports from the Google Adwords API.
+        Retrieve and populate the following reports from the Google AdWords API.
 
         - Account Performance Report
         - Campaign Performance Report
@@ -332,7 +332,7 @@ class Account(models.Model):
           serializer=DJANGO_CEREAL_PICKLE)
     def create_report_file(self, report_definition):
         """
-        Create a ReportFile that contains the Google Adwords data as specified by report_definition.
+        Create a ReportFile that contains the Google AdWords data as specified by report_definition.
         """
         try:
             return ReportFile.objects.request(report_definition=report_definition,
@@ -484,18 +484,25 @@ class Account(models.Model):
 
         return report_definition
 
-    def spend(self, start, finish):
+    def spend(self, start, finish, complain_if_insufficient_data=True):
         """
         @param start: the start date the the data is for.
         @param finish: the finish date you want the data for.
+        @param complain_if_insufficient_data: if `True`, raises an
+            :exc:`AdWordsDataInconsistencyError` if the AdWords account doesn't
+            have enough data for the requested period.
         """
         account_first_synced = DailyAccountMetrics.objects.filter(account=self).aggregate(Min('day'))
         first_synced_date = None
         if 'day__min' in account_first_synced:
             first_synced_date = account_first_synced['day__min']
 
-        if not self.account_last_synced or self.account_last_synced < finish or not first_synced_date or first_synced_date > start:
-            raise AdwordsDataInconsistencyError('Google Adwords Account %s does not have correct amount of data to calculate the spend between "%s" and "%s"' % (
+        if complain_if_insufficient_data and (
+                not self.account_last_synced
+                or self.account_last_synced < finish
+                or not first_synced_date
+                or first_synced_date > start):
+            raise AdWordsDataInconsistencyError('Google AdWords Account %s does not have correct amount of data to calculate the spend between "%s" and "%s"' % (
                 self,
                 start,
                 finish,
@@ -644,7 +651,7 @@ class DailyAccountMetrics(models.Model):
     def __unicode__(self):
         return '%s' % (self.day)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, account):
             device = data.get('Device')
@@ -767,7 +774,7 @@ class Campaign(models.Model):
     def __unicode__(self):
         return '%s' % (self.campaign)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, account):
             """
@@ -937,7 +944,7 @@ class DailyCampaignMetrics(models.Model):
     def __unicode__(self):
         return '%s' % (self.day)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, campaign):
             year, month, day = [int(i) for i in data.get('Day').split('-')]
@@ -991,7 +998,7 @@ class AdGroup(models.Model):
     def __unicode__(self):
         return '%s' % (self.ad_group)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, campaign):
             """
@@ -1172,7 +1179,7 @@ class DailyAdGroupMetrics(models.Model):
     def __unicode__(self):
         return '%s' % (self.day)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, ad_group):
             day = data.get('Day')
@@ -1263,7 +1270,7 @@ class Ad(models.Model):
     def __unicode__(self):
         return '%s' % truncatechars(self.ad, 24)
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, ad_group):
             """
@@ -1411,7 +1418,7 @@ class DailyAdMetrics(models.Model):
     def __unicode__(self):
         return '%s' % self.day
 
-    class QuerySet(PopulatingGoogleAdwordsQuerySet):
+    class QuerySet(PopulatingGoogleAdWordsQuerySet):
 
         def populate(self, data, ad):
             day = data.get('Day')
@@ -1487,7 +1494,7 @@ class ReportFile(models.Model):
                 print metric, value
 
             @param report_definition: A dict of values used to specify a report to get from the API.
-            @param client_customer_id: A string containing the Adwords Customer Client ID.
+            @param client_customer_id: A string containing the AdWords Customer Client ID.
             @return OrderedDict containing report
             """
             client = adwords_service(client_customer_id)

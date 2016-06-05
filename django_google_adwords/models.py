@@ -484,17 +484,24 @@ class Account(models.Model):
 
         return report_definition
 
-    def spend(self, start, finish):
+    def spend(self, start, finish, complain_if_insufficient_data=True):
         """
         @param start: the start date the the data is for.
         @param finish: the finish date you want the data for.
+        @param complain_if_insufficient_data: if `True`, raises an
+            :exc:`AdwordsDataInconsistencyError` if the AdWords account doesn't
+            have enough data for the requested period.
         """
         account_first_synced = DailyAccountMetrics.objects.filter(account=self).aggregate(Min('day'))
         first_synced_date = None
         if 'day__min' in account_first_synced:
             first_synced_date = account_first_synced['day__min']
 
-        if not self.account_last_synced or self.account_last_synced < finish or not first_synced_date or first_synced_date > start:
+        if complain_if_insufficient_data and (
+                not self.account_last_synced
+                or self.account_last_synced < finish
+                or not first_synced_date
+                or first_synced_date > start):
             raise AdwordsDataInconsistencyError('Google Adwords Account %s does not have correct amount of data to calculate the spend between "%s" and "%s"' % (
                 self,
                 start,

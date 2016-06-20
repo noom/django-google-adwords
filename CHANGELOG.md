@@ -1,3 +1,19 @@
+# Release 0.8.0 - Mon Jun 20 14:27:14 AEST 2016
+
+Breaking change.
+
+- Remove `Adwords*` compatibility aliases introduced in 0.7.7.
+
+- Upgrade Google API to v201605.
+
+  Note that in v201603 empty values become '--' (in my experience, maybe
+  '-- '?) rather than an empty string. This may affect user code.
+
+- Replace report definition key `includeZeroImpressions` with a keyword
+  argument `include_zero_impressions` on `ReportFile.objects.request()`.
+
+- Remove the `TargetCpa` (`max_cpa_converted_clicks`) ad group metrics field
+
 # Release 0.7.7 - Mon Jun  6 08:43:24 AEST 2016
 
 - Correct Adwords to AdWords everywhere.

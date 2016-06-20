@@ -42,7 +42,3 @@ class GoogleAdWordsConf(AppConf):
 
     class Meta:
         prefix = 'GOOGLEADWORDS'
-
-
-# For backwards compatibility (it was renamed in 0.7.7)
-GoogleAdwordsConf = GoogleAdWordsConf

@@ -1169,7 +1169,6 @@ class DailyAdGroupMetrics(models.Model):
     bid_strategy_id = models.BigIntegerField(help_text='Bid Strategy ID', null=True, blank=True)
     bid_strategy_name = models.CharField(max_length=255, null=True, blank=True)
     bid_strategy_type = models.CharField(max_length=40, choices=BID_STRATEGY_TYPE_CHOICES, help_text='Bid Strategy Type', null=True, blank=True)
-    max_cpa_converted_clicks = MoneyField(max_digits=12, decimal_places=2, default=0, help_text='Max. CPA (converted clicks)', null=True, blank=True)
     value_converted_click = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Value / converted click')
     value_conv = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, help_text='Value / conv.')
     view_through_conv = models.BigIntegerField(help_text='View-through conv.', null=True, blank=True)

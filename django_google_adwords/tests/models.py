@@ -410,7 +410,6 @@ class DjangoGoogleAdWordsTestCase(TransactionTestCase):
         # Check a row to ensure fields are correct
         ad_group_metric = DailyAdGroupMetrics.objects.get(ad_group__ad_group_id=323809001, day=date(2014, 7, 28))
 
-        self.assertEqual(ad_group_metric.max_cpa_converted_clicks, None)
         self.assertEqual(ad_group_metric.bid_strategy_id, 0)
         self.assertEqual(ad_group_metric.bid_strategy_name, '')
         self.assertEqual(ad_group_metric.bid_strategy_type, DailyAdGroupMetrics.BID_STRATEGY_TYPE_MANUAL_CPC)
@@ -460,7 +459,6 @@ class DjangoGoogleAdWordsTestCase(TransactionTestCase):
         # Check a row to ensure fields are correct
         ad_group_metric = DailyAdGroupMetrics.objects.get(ad_group__ad_group_id=323809001, day=date(2014, 7, 28))
 
-        self.assertEqual(ad_group_metric.max_cpa_converted_clicks, None)
         self.assertEqual(ad_group_metric.bid_strategy_id, 0)
         self.assertEqual(ad_group_metric.bid_strategy_name, '')
         self.assertEqual(ad_group_metric.bid_strategy_type, DailyAdGroupMetrics.BID_STRATEGY_TYPE_MANUAL_CPC)

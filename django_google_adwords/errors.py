@@ -43,7 +43,3 @@ class NoAccountCurrencyCodeError(Exception):
 
 class AdWordsDataInconsistencyError(Exception):
     pass
-
-
-# For backwards compatibility (it was renamed in 0.7.7)
-AdwordsDataInconsistencyError = AdWordsDataInconsistencyError

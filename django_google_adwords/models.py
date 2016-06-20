@@ -478,8 +478,7 @@ class Account(models.Model):
                     'min': start.strftime("%Y%m%d"),
                     'max': finish.strftime("%Y%m%d")
                 },
-            },
-            'includeZeroImpressions': 'true'
+            }
         }
 
         return report_definition
@@ -863,8 +862,7 @@ class Campaign(models.Model):
                            'Date'],
                 'dateRange': {'min': start.strftime("%Y%m%d"),
                               'max': finish.strftime("%Y%m%d")},
-            },
-            'includeZeroImpressions': 'true'
+            }
         }
 
         return report_definition
@@ -1108,8 +1106,7 @@ class AdGroup(models.Model):
                            'Date'],
                 'dateRange': {'min': start.strftime("%Y%m%d"),
                               'max': finish.strftime("%Y%m%d")},
-            },
-            'includeZeroImpressions': 'true'
+            }
         }
 
         return report_definition
@@ -1382,8 +1379,7 @@ class Ad(models.Model):
                            'Date'],
                 'dateRange': {'min': start.strftime("%Y%m%d"),
                               'max': finish.strftime("%Y%m%d")},
-            },
-            'includeZeroImpressions': 'true'
+            }
         }
 
         return report_definition
@@ -1460,7 +1456,8 @@ class ReportFile(models.Model):
         return '%s' % self.file
 
     class QuerySet(_QuerySet):
-        def request(self, report_definition, client_customer_id):
+        def request(self, report_definition, client_customer_id,
+                    include_zero_impressions=True):
             """
             Fields and report types can be found here https://developers.google.com/adwords/api/docs/appendix/reports
 
@@ -1482,9 +1479,7 @@ class ReportFile(models.Model):
                         'min': '20140501',
                         'max': '20140601'
                     },
-                },
-                # Enable to get rows with zero impressions.
-                'includeZeroImpressions': 'false'
+                }
             }
 
             Example usage of return data
@@ -1502,7 +1497,9 @@ class ReportFile(models.Model):
             try:
                 report_file = ReportFile.objects.create()
                 with report_file.file_manager('%s.gz' % report_file.pk) as f:
-                    report_downloader.DownloadReport(report_definition, output=f)
+                    report_downloader.DownloadReport(
+                        report_definition, output=f,
+                        include_zero_impressions=include_zero_impressions)
                 return report_file
             except GoogleAdsError as e:
                 report_file.delete()  # cleanup

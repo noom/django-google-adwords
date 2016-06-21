@@ -1,3 +1,9 @@
+# Release 0.8.1 - Tue Jun 21 15:05:12 AEST 2016
+
+- Upgrade googleads to `~4.1.0`.
+
+  (0.8.0 was a broken change…)
+
 # Release 0.8.0 - Mon Jun 20 14:27:14 AEST 2016
 
 Breaking change.

@@ -1224,6 +1224,10 @@ class Ad(models.Model):
     TYPE_TEXT_AD = 'Text ad'
     TYPE_THIRD_PARTY_REDIRECT_AD = 'Third party ad'
     TYPE_DYNAMIC_SEARCH_AD = 'Dynamic search ad'
+    TYPE_CALL_ONLY_AD = 'Call only ad'
+    TYPE_EXPANDED_TEXT_AD = 'Expanded text ad'
+    TYPE_RESPONSIVE_DISPLAY_AD = 'Responsive display ad'
+    TYPE_UNKNOWN = 'unknown'
     TYPE_CHOICES = (
         (TYPE_DEPRECATED_AD, 'Other'),
         (TYPE_IMAGE_AD, 'Image Ad'),
@@ -1232,7 +1236,11 @@ class Ad(models.Model):
         (TYPE_TEMPLATE_AD, 'Display Ad'),
         (TYPE_TEXT_AD, 'Text Ad'),
         (TYPE_THIRD_PARTY_REDIRECT_AD, 'Third Party Ad'),
-        (TYPE_DYNAMIC_SEARCH_AD, 'Dynamic Search Ad')
+        (TYPE_DYNAMIC_SEARCH_AD, 'Dynamic Search Ad'),
+        (TYPE_CALL_ONLY_AD, 'Call only ad'),
+        (TYPE_EXPANDED_TEXT_AD, 'Expanded text ad'),
+        (TYPE_RESPONSIVE_DISPLAY_AD, 'Responsive display ad'),
+        (TYPE_UNKNOWN, 'unknown'),
     )
 
     APPROVAL_STATUS_APPROVED = 'approved'
@@ -1324,7 +1332,7 @@ class Ad(models.Model):
             return self.filter(ad_state=Ad.STATE_REMOVED)
 
         def text(self):
-            return self.filter(ad_type=Ad.TYPE_TEXT_AD)
+            return self.filter(ad_type__in=[Ad.TYPE_TEXT_AD, Ad.TYPE_EXPANDED_TEXT_AD])
 
     @staticmethod
     def get_selector(start=None, finish=None):

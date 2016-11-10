@@ -1,3 +1,7 @@
+# Release 0.8.2 - Thursday 10 November  12:57:31 AEDT 2016
+
+- Added missing ad types and added expanded text ad to text qs.
+
 # Release 0.8.1 - Tue Jun 21 15:05:12 AEST 2016
 
 - Upgrade googleads to `~4.1.0`.

@@ -1,3 +1,7 @@
+# Release 0.8.3 - Thursday 6 April  10:24:39 AEST 2017
+
+- Update to Adwords API v201702
+
 # Release 0.8.2 - Thursday 10 November  12:57:31 AEDT 2016
 
 - Added missing ad types and added expanded text ad to text qs.

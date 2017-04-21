@@ -100,6 +100,8 @@ class PopulatingGoogleAdWordsQuerySet(_QuerySet):
                 # fields doubles. So I'm doubly scared.
                 if isinstance(field, models.BigIntegerField) and value.endswith('.0'):
                     value = value[:-2]
+                if isinstance(field, models.BigIntegerField) and value.endswith('.00'):
+                    value = value[:-3]
 
                 value = field.to_python(value)
             except DjangoValidationError as e:

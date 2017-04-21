@@ -1,3 +1,7 @@
+# Release 0.8.7 - Friday 21 April  14:47:38 AEST 2017
+
+- Removed another deprecated field from report definitions
+
 # Release 0.8.6 - Friday 21 April  14:37:25 AEST 2017
 
 - Added to Chris' nasty hack with the integer field and with Google now returning doubles

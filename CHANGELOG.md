@@ -1,3 +1,7 @@
+# Release 0.8.5 - Friday 21 April  14:27:36 AEST 2017
+
+- Removed another deprecated report definition field
+
 # Release 0.8.4 - Friday 21 April  14:11:59 AEST 2017
 
 - Removed ClickConversionRate from report definitions as it has been removed as of version V201702

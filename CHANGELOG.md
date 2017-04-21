@@ -1,3 +1,7 @@
+# Release 0.8.4 - Friday 21 April  14:11:59 AEST 2017
+
+- Removed ClickConversionRate from report definitions as it has been removed as of version V201702
+
 # Release 0.8.3 - Thursday 6 April  10:24:39 AEST 2017
 
 - Update to Adwords API v201702

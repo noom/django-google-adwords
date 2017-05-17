@@ -1,3 +1,7 @@
+# Release 0.8.8 - Wednesday 17 May  10:23:51 AEST 2017
+
+- Added Dynamic Search Ad type to text queryset
+
 # Release 0.8.7 - Friday 21 April  14:47:38 AEST 2017
 
 - Removed another deprecated field from report definitions

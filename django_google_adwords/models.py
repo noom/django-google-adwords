@@ -1324,7 +1324,7 @@ class Ad(models.Model):
             return self.filter(ad_state=Ad.STATE_REMOVED)
 
         def text(self):
-            return self.filter(ad_type__in=[Ad.TYPE_TEXT_AD, Ad.TYPE_EXPANDED_TEXT_AD])
+            return self.filter(ad_type__in=[Ad.TYPE_TEXT_AD, Ad.TYPE_EXPANDED_TEXT_AD, Ad.TYPE_DYNAMIC_SEARCH_AD])
 
     @staticmethod
     def get_selector(start=None, finish=None):

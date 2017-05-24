@@ -1,3 +1,7 @@
+# Release 0.8.9 - Wednesday 24 May  18:03:33 AEST 2017
+
+- Added search impression share aggregate method on Account Metrics
+
 # Release 0.8.8 - Wednesday 17 May  10:23:51 AEST 2017
 
 - Added Dynamic Search Ad type to text queryset

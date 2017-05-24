@@ -735,6 +735,9 @@ class DailyAccountMetrics(models.Model):
         def average_search_lost_impression_share_budget(self, start, finish):
             return self.within_period(start, finish).aggregate(Avg('search_lost_is_budget'))
 
+        def average_search_impression_share(self, start, finish):
+            return self.within_period(start, finish).aggregate(Avg('search_impr_share'))
+
         def device_average_click_conversion_rate_for_period(self, start, finish):
             return self.within_period(start, finish).values('device').annotate(click_conversion_rate=Avg('click_conversion_rate'))
 
